@@ -1,0 +1,9 @@
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-list-item {
+  width: 100%;
+}
