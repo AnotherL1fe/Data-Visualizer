@@ -1,3 +1,4 @@
+//Библиотека для http-запросов
 import axios from 'axios';
 
 const API_BASE_URL = 'https://jsonplaceholder.typicode.com';

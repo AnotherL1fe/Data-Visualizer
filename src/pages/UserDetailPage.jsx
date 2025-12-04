@@ -4,13 +4,14 @@ import { useUserPostsLoader } from '../hooks/useDataLoader';
 import useDataStore from '../store/dataStore';
 import UserPosts from '../components/Posts/UserPosts';
 import Spinner from '../components/UI/Spinner';
+import { useShallow } from 'zustand/react/shallow';
 import './UserDetailPage.css';
 
 const UserDetailPage = () => {
   const { id } = useParams();
   useUserPostsLoader(id);
   
-  const user = useDataStore((state) => state.getUserById(id));
+  const user = useDataStore(useShallow((state) => state.getUserById(id)));
   const isLoading = useDataStore((state) => state.isLoading);
   
   if (isLoading && !user) {

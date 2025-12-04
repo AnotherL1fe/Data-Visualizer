@@ -1,3 +1,4 @@
+//библиотека для управления глобальными запросами
 import { create } from 'zustand';
 
 const useDataStore = create((set, get) => ({
@@ -5,7 +6,7 @@ const useDataStore = create((set, get) => ({
   posts: {},
   isLoading: false,
   viewMode: 'list',
-  
+//то что нужно вывести
   setUsers: (users) => set({ users }),
   
   setPosts: (userId, posts) => 
@@ -15,7 +16,8 @@ const useDataStore = create((set, get) => ({
         [userId]: posts
       }
     })),
-  
+//получение данных
+
   setLoading: (isLoading) => set({ isLoading }),
   
   setViewMode: (mode) => set({ viewMode: mode }),
