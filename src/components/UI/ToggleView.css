@@ -14,12 +14,12 @@
 }
 
 .toggle-btn:hover {
-  border-color: #3498db;
+  border-color: #000000;
   background: #f8f9fa;
 }
 
 .toggle-btn.active {
-  border-color: #3498db;
-  background: #3498db;
+  border-color: #000407;
+  background: #000000;
   color: white;
 }

@@ -5,14 +5,14 @@
 .back-link {
   display: inline-block;
   margin-bottom: 30px;
-  color: #3498db;
+  color: #000000;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .back-link:hover {
-  color: #2980b9;
+  color: #696969;
 }
 
 .user-profile {
@@ -34,7 +34,7 @@
 .profile-avatar {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, #757575 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -71,7 +71,7 @@
   background: #f8f9fa;
   border-radius: 8px;
   padding: 20px;
-  border-left: 4px solid #3498db;
+  border-left: 4px solid #000000;
 }
 
 .detail-card h4 {
@@ -87,7 +87,7 @@
 }
 
 .detail-card a {
-  color: #3498db;
+  color: #000000;
   text-decoration: none;
 }
 
