@@ -1,0 +1,21 @@
+{
+  "name": "data-visualizer-backend",
+  "version": "1.0.0",
+  "description": "Простой backend для визуализатора данных",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.22.1",
+    "file-system": "^2.2.2",
+    "node-fetch": "^3.3.2",
+    "npm-path": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
