@@ -9,11 +9,14 @@ const Header = () => {
       <div className="header-content">
         <div className="logo">
           <Link to="/" className="logo-link">
-            <h1>Data Visualizer</h1>
+            <h1>📊 Data Visualizer</h1>
           </Link>
         </div>
         <div className="header-controls">
           <ToggleView />
+          <Link to="/add-post" className="add-post-btn">
+            📝 Добавить пост
+          </Link>
         </div>
       </div>
     </header>

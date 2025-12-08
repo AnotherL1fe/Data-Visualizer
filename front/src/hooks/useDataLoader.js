@@ -2,87 +2,103 @@ import { useEffect } from 'react';
 import jsonPlaceholderAPI from '../api/jsonPlaceholder.js';
 import useDataStore from '../store/dataStore.js';
 
-export const useUsersLoader = (forceRefresh = false) => {
+export const useUsersLoader = () => {
   const { users, setUsers, setLoading, hasUsers } = useDataStore();
-
+  
   useEffect(() => {
     const loadUsers = async () => {
-      // Если не форсируем обновление и пользователи уже загружены, пропускаем
-      if (!forceRefresh && hasUsers()) {
-        console.log('Using cached users from localStorage');
-        return;
-      }
-
+      // Если пользователи уже загружены, пропускаем запрос
+      if (hasUsers()) return;
+      
       setLoading(true);
       try {
-        console.log('Fetching users from API...');
         const data = await jsonPlaceholderAPI.fetchUsers();
         setUsers(data);
-
-        // Логирование в консоль
-        console.log(`Loaded ${data.length} users, saved to localStorage`);
       } catch (error) {
         console.error('Failed to load users:', error);
-
-        // Если есть кешированные данные, используем их при ошибке сети
-        if (users.length > 0) {
-          console.log('Using cached data due to network error');
-        }
       } finally {
         setLoading(false);
       }
     };
-
+    
     loadUsers();
-  }, [forceRefresh, setUsers, setLoading, hasUsers, users.length]);
-
+  }, [setUsers, setLoading, hasUsers]);
+  
   return { users };
 };
 
-export const useUserPostsLoader = (userId, forceRefresh = false) => {
+export const useUserPostsLoader = (userId) => {
   const { setPosts, setLoading, hasUserPosts } = useDataStore();
-
+  
   useEffect(() => {
     const loadPosts = async () => {
-      if (!userId) return;
-
-      // Если не форсируем обновление и посты уже загружены, пропускаем
-      if (!forceRefresh && hasUserPosts(userId)) {
-        console.log(`Using cached posts for user ${userId} from localStorage`);
-        return;
-      }
-
+      // Если посты уже загружены, пропускаем запрос
+      if (hasUserPosts(userId)) return;
+      
       setLoading(true);
       try {
-        console.log(`Fetching posts for user ${userId} from API...`);
         const data = await jsonPlaceholderAPI.fetchUserPosts(userId);
         setPosts(userId, data);
-
-        // Логирование в консоль
-        console.log(`Loaded ${data.length} posts for user ${userId}, saved to localStorage`);
       } catch (error) {
         console.error(`Failed to load posts for user ${userId}:`, error);
       } finally {
         setLoading(false);
       }
     };
-
+    
     if (userId) {
       loadPosts();
     }
-  }, [userId, forceRefresh, setPosts, setLoading, hasUserPosts]);
-
+  }, [userId, setPosts, setLoading, hasUserPosts]);
+  
   return {};
 };
 
-// Хук для принудительного обновления данных
-export const useForceRefresh = () => {
-  const { clearCache } = useDataStore();
-
-  const refreshAllData = () => {
-    clearCache();
-    window.location.reload();
+export const usePostActions = () => {
+  const { addPostToUser, updateUserPost, removeUserPost } = useDataStore();
+  
+  const createPost = async (postData) => {
+    try {
+      const result = await jsonPlaceholderAPI.createPost(postData);
+      if (result.success) {
+        addPostToUser(postData.userId, result.post);
+      }
+      return result;
+    } catch (error) {
+      console.error('Error creating post:', error);
+      throw error;
+    }
   };
-
-  return { refreshAllData };
+  
+  const updatePost = async (postId, postData) => {
+    try {
+      const result = await jsonPlaceholderAPI.updatePost(postId, postData);
+      if (result.success) {
+        updateUserPost(postData.userId, postId, result.post);
+      }
+      return result;
+    } catch (error) {
+      console.error(`Error updating post ${postId}:`, error);
+      throw error;
+    }
+  };
+  
+  const deletePost = async (userId, postId) => {
+    try {
+      const result = await jsonPlaceholderAPI.deletePost(postId);
+      if (result.success) {
+        removeUserPost(userId, postId);
+      }
+      return result;
+    } catch (error) {
+      console.error(`Error deleting post ${postId}:`, error);
+      throw error;
+    }
+  };
+  
+  return {
+    createPost,
+    updatePost,
+    deletePost
+  };
 };

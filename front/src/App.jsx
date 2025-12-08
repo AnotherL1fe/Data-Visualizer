@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import UserDetailPage from './pages/UserDetailPage';
 import CacheManager from './components/CacheManager/CacheManager';
 import { useStorageMonitor } from './hooks/useLocalStorage';
+import AddPostPage from './pages/addPostPage';
 import './App.css';
 
 function App() {
@@ -30,11 +31,14 @@ function App() {
 
                     {showCacheManager && <CacheManager />}
 
-                    <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/user/:id" element={<UserDetailPage />} />
-                    </Routes>
-                </div>
+
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/user/:id" element={<UserDetailPage />} />
+                            <Route path="/user/:id/add-post" element={<AddPostPage />} />
+                            <Route path="/add-post" element={<AddPostPage />} />
+                        </Routes>
+                    </div>
             </Layout>
         </Router>
     );
