@@ -15,6 +15,14 @@ const useDataStore = create(
       // Действия
       setUsers: (users) => set({ users }),
 
+      addPost: (userId, post) => 
+        set((state) => ({
+          posts: {
+            ...state.posts,
+            [userId]: [...state.posts[userId], post]
+          }
+        })),
+
       setPosts: (userId, posts) =>
         set((state) => ({
           posts: {

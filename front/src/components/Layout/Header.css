@@ -34,8 +34,8 @@
 }
 .add-post-btn {
   padding: 10px 20px;
-  background: #2ecc71;
-  color: white;
+  background: #000000;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   border-radius: 6px;
   font-size: 14px;

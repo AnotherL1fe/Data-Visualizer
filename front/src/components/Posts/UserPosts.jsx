@@ -4,6 +4,7 @@ import './UserPosts.css';
 
 const UserPosts = ({ userId }) => {
   const posts = useDataStore((state) => state.getPostsByUserId(userId));
+  console.log(posts);
   
   if (!posts || posts.length === 0) {
     return (
@@ -21,7 +22,6 @@ const UserPosts = ({ userId }) => {
           <div key={post.id} className="post-card">
             <h4 className="post-title">{post.title}</h4>
             <p className="post-body">{post.body}</p>
-            <div className="post-id">Post ID: {post.id}</div>
           </div>
         ))}
       </div>
