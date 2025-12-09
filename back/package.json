@@ -9,9 +9,12 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "express": "^4.22.1",
     "file-system": "^2.2.2",
+    "jsonwebtoken": "^9.0.3",
     "node-fetch": "^3.3.2",
     "npm-path": "^2.0.4"
   },

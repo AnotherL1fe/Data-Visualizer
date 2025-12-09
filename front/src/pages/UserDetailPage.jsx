@@ -1,17 +1,16 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useUserPostsLoader } from '../hooks/useDataLoader';
-import useDataStore from '../store/dataStore';
-import UserPosts from '../components/Posts/UserPosts';
-import Spinner from '../components/UI/Spinner';
-import { useShallow } from 'zustand/react/shallow';
+import { useParams, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { useUserPostsLoader } from '../hooks/useDataLoader.js';
+import useDataStore from '../store/dataStore.js';
+import UserPosts from '../components/Posts/UserPosts.jsx';
+import Spinner from '../components/UI/Spinner.jsx';
 import './UserDetailPage.css';
 
 const UserDetailPage = () => {
   const { id } = useParams();
   useUserPostsLoader(id);
   
-  const user = useDataStore(useShallow((state) => state.getUserById(id)));
+  const user = useDataStore((state) => state.getUserById(id));
   const isLoading = useDataStore((state) => state.isLoading);
   
   if (isLoading && !user) {
@@ -56,20 +55,23 @@ const UserDetailPage = () => {
           
           <div className="detail-card">
             <h4>Address</h4>
-            <p>{user.address.street}, {user.address.suite}</p>
-            <p>{user.address.city}, {user.address.zipcode}</p>
-            <p><em>Geo: {user.address.geo.lat}, {user.address.geo.lng}</em></p>
+            <p>{user.address?.street}, {user.address?.suite}</p>
+            <p>{user.address?.city}, {user.address?.zipcode}</p>
           </div>
           
           <div className="detail-card">
             <h4>Company</h4>
-            <p><strong>{user.company.name}</strong></p>
-            <p>{user.company.catchPhrase}</p>
-            <p><em>{user.company.bs}</em></p>
+            <p><strong>{user.company?.name}</strong></p>
+            <p>{user.company?.catchPhrase}</p>
+            <p><em>{user.company?.bs}</em></p>
           </div>
         </div>
         
-        <UserPosts userId={id} />
+        {/* Добавьте вложенные маршруты для UserDetailPage */}
+        <Routes>
+          <Route path="/" element={<UserPosts userId={id} />} />
+          <Route path="/add-post" element={<addPostPage />} />
+        </Routes>
       </div>
     </div>
   );

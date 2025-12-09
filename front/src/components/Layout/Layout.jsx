@@ -2,10 +2,10 @@ import React from 'react';
 import Header from './Header';
 import './Layout.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, user, onLogout }) => {
   return (
     <div className="app-layout">
-      <Header />
+      <Header user={user} onLogout={onLogout} />
       <main className="app-main">
         <div className="container">
           {children}
@@ -14,6 +14,7 @@ const Layout = ({ children }) => {
       <footer className="app-footer">
         <div className="container">
           <p>Data Visualizer © 2024</p>
+          {user && <p>Вы вошли как: {user.username}</p>}
         </div>
       </footer>
     </div>

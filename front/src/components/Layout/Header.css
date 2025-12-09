@@ -49,3 +49,61 @@
 .add-post-btn:hover {
   background: #27ae60;
 }
+
+.login-btn,
+.register-btn,
+.logout-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.login-btn {
+  background: #3498db;
+  color: white;
+  margin-right: 10px;
+}
+
+.login-btn:hover {
+  background: #2980b9;
+}
+
+.register-btn {
+  background: #2ecc71;
+  color: white;
+}
+
+.register-btn:hover {
+  background: #27ae60;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+  margin-left: 15px;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  color: white;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
